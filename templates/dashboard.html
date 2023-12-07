@@ -61,8 +61,10 @@
                     {% endif %}
                     {% if uv_index_image %}
                         <img src="{{ uv_index_image }}" alt="UV Index Image" style="max-height: 100px; max-width: 100px;">
-                        <h3 style="text-align: center;">{{ uv_index_massage }} </h3>
-                        <p style="text-align: center;">{{ uv_index_detilmassage }}</p>
+                        <div class="massage">
+                            <h3 style="text-align: center;">{{ uv_index_massage }} </h3>
+                            <p style="text-align: center;">{{ uv_index_detilmassage }}</p>
+                        </div>
                     {% endif %}
                 {% endif %}
             </div>

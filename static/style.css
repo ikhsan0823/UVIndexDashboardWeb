@@ -7,7 +7,7 @@ body, h1, h2, p, table {
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #caebf4;
+    background-color: #e7f3fd;
 }
 .home-button {
     display: flex;
@@ -16,7 +16,7 @@ body {
     margin-right: 10px;
     text-decoration: none;
     padding: 10px 15px;
-    background-color: #8be69e;
+    background-color: #11e875;
     color: #fff;
     width: 70px;
     height: 40px;
@@ -25,13 +25,13 @@ body {
     transition: background-color 0.3s ease;
 }
 .home-button:hover {
-    background-color: #e69e8b;
+    background-color: #e87511;
 }
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e68bd3;
+    background-color: #e81184;
 }
 .header-text {
     background-color: none;
@@ -73,7 +73,7 @@ body {
 .current-container {
     display: flex;
     flex-direction: column;
-    background-color: #8bd3e6;
+    background-color: #1184e8;
     text-align: center;
     color: #fff;
     border-radius: 8px;
@@ -97,17 +97,17 @@ body {
     border-radius: 100%;
     width: 100px;
     height: 100px;
-    background-color: #8bd3e6;
+    background-color: #1184e8;
     transition: background-color 0.3s ease;
 }
 .uvindex-container:hover {
-    background-color: #4cbbd8;
+    background-color: #e81184;
 }
 .image-container {
     display: flex;
     flex-direction: column;
     min-width: 250px;
-    background-color: #8bd3e6;
+    background-color: #1184e8;
     color: #fff;
     border-radius: 8px;
     padding: 10px;
@@ -118,9 +118,12 @@ body {
     justify-content: center;
     max-height: 300px;
 }
+.massage {
+    max-width: 300px;
+}
 .all-forecast {
     height: 100%;
-    background-color: #8bd3e6;
+    background-color: #1184e8;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 10px;
@@ -138,7 +141,7 @@ body {
     transition: background-color 0.3s ease;
 }
 .forecast-text:hover {
-    background-color: #e69e8b;
+    background-color: #e87511;
 }
 .forecast-container {
     height: 100%;
@@ -149,7 +152,7 @@ body {
     width: 100%;
 }
 .group-container {
-    background-color: #e68bd3;
+    background-color: #e81184;
     text-align: left;
     color: #fff;
     border-radius: 8px;
