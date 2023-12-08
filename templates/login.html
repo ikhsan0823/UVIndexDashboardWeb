@@ -13,17 +13,30 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
+            padding: 0%;
+        }
+
+        .parent-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            width: 100%;
         }
 
         h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             padding: 20px;
             width: 230px;
         }
 
         form {
+            align-items: center;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -43,6 +56,10 @@
             box-sizing: border-box;
         }
 
+        ::placeholder {
+            font-style: italic;
+        }
+
         button {
             cursor: pointer;
             background-color: #11e875;
@@ -59,11 +76,13 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to UV Index Web!</h1>
-    <form method="post" action="/">
-        <label for="address">Enter your address</label>
-        <input type="text" id="address" name="address" required>
-        <button type="submit">Get UV Index</button>
-    </form>
+    <div class="parent-container">
+        <h1>Welcome to UV Index Web!</h1>
+        <form method="post" action="/">
+            <label for="address">Enter your address</label>
+            <input type="text" id="address" placeholder="e.g. Tokyo" name="address" required>
+            <button type="submit">Get UV Index</button>
+        </form>
+    </div>
 </body>
 </html>
