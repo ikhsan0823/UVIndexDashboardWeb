@@ -65,6 +65,7 @@
             background-color: #11e875;
             color: white;
             padding: 10px 15px;
+            width: 100%;
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s ease;
@@ -72,6 +73,22 @@
 
         button:hover {
         background-color: #e87511;
+        border-color: #fff;
+        }
+
+        .button-getuvindexwithcurrentlocation {
+            color: black;
+            background-color: #fff;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        p {
+            font-size: 12px;
+            text-align: center;
+            color: #737373;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -80,9 +97,52 @@
         <h1>Welcome to UV Index Web!</h1>
         <form method="post" action="/">
             <label for="address">Enter your address</label>
-            <input type="text" id="address" placeholder="e.g. Tokyo" name="address" required>
+            <input type="text" id="address" placeholder="e.g. Tokyo" name="address">
+            <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+            <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
             <button type="submit">Get UV Index</button>
+            <p>Or get UV index with</p>
+            <button class="button-getuvindexwithcurrentlocation" type="button" onclick="getuvindexWithCurrentLocation()">Current Location</button>
+            <p id="demo" style="font-style: italic; color: black; margin-top: 5px; text-align: left;"></p>
         </form>
     </div>
+    
+    <script>
+        const x = document.getElementById("demo");
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        
+        function getuvindexWithCurrentLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude + 
+          "<br>Longitude: " + position.coords.longitude;
+          latitudeInput.value = position.coords.latitude;
+          longitudeInput.value = position.coords.longitude;
+        }
+        
+        function showError(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              x.innerHTML = "User denied the request for Geolocation.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              x.innerHTML = "Location information is unavailable.";
+              break;
+            case error.TIMEOUT:
+              x.innerHTML = "The request to get user location timed out.";
+              break;
+            case error.UNKNOWN_ERROR:
+              x.innerHTML = "An unknown error occurred.";
+              break;
+          }
+        }
+    </script>
 </body>
 </html>

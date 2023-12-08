@@ -15,10 +15,18 @@ def index():
 
     if request.method == 'POST':
         address = request.form['address']
+        firstlatitude = request.form['latitude']
+        firstlongitude = request.form['longitude']
 
-        # Use geocoder to get latitude and longitude
-        location = geocoder.osm(address)
-        latitude, longitude = location.latlng
+        if not (address or (firstlatitude and firstlongitude)):
+            return redirect(url_for('login'))
+        location = None
+        if address:
+            location = geocoder.osm(address)
+            latitude, longitude = location.latlng
+        elif firstlatitude and firstlongitude:
+            latitude = firstlatitude
+            longitude = firstlongitude
 
         # Use geotimezone API to get timezone information
         timezone_response = requests.get(GEOTIMEZONE_API_URL, params={'latitude': latitude, 'longitude': longitude})
@@ -29,7 +37,7 @@ def index():
 
         # Get location information
         location_info = {
-            'address': location.address,
+            'address': location.address if location else '',
             'latitude': latitude,
             'longitude': longitude,
             'local_time': get_local_time(latitude, longitude),
