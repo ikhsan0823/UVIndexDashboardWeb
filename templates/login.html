@@ -6,42 +6,57 @@
     <title>Input Address</title>
     <style>
         body {
+            display: flex;
             font-family: Arial, sans-serif;
             background-color: #e7f3fd;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            padding: 0%;
         }
 
         .parent-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            flex-direction: row;
+            align-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100%;
-            width: 100%;
+            background-color: #11e875;
+            border-radius: 15px;
         }
 
-        h1 {
+        .h1 {
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
-            width: 230px;
+            width: 100%; /* Menggunakan lebar 100% agar sesuai dengan parent container */
+            color: white;
         }
 
         form {
-            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             background-color: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            border-radius: 15px;
+            width: 100%; /* Menggunakan lebar 100% agar sesuai dengan parent container */
+        }
+
+        .h1, form {
+            flex:1;
+            margin:0;
+        }
+
+        /* Tambahkan aturan media query untuk meresponsifkan lebar form */
+        @media only screen and (min-width: 600px) {
+            form {
+                width: 48%; /* Sesuaikan dengan lebar yang diinginkan pada layar yang lebih besar */
+            }
         }
 
         label {
@@ -72,8 +87,8 @@
         }
 
         button:hover {
-        background-color: #e87511;
-        border-color: #fff;
+            background-color: #e87511;
+            border-color: #fff;
         }
 
         .button-getuvindexwithcurrentlocation {
@@ -93,56 +108,20 @@
     </style>
 </head>
 <body>
-    <div class="parent-container">
-        <h1>Welcome to UV Index Web!</h1>
-        <form method="post" action="/">
-            <label for="address">Enter your address</label>
-            <input type="text" id="address" placeholder="e.g. Tokyo" name="address">
-            <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
-            <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
-            <button type="submit">Get UV Index</button>
-            <p>Or get UV index with</p>
-            <button class="button-getuvindexwithcurrentlocation" type="button" onclick="getuvindexWithCurrentLocation()">Current Location</button>
-            <p id="demo" style="font-style: italic; color: black; margin-top: 5px; text-align: left;"></p>
-        </form>
-    </div>
-    
-    <script>
-        const x = document.getElementById("demo");
-        const latitudeInput = document.getElementById("latitude");
-        const longitudeInput = document.getElementById("longitude");
-        
-        function getuvindexWithCurrentLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-          } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
-        
-        function showPosition(position) {
-          x.innerHTML = "Latitude: " + position.coords.latitude + 
-          "<br>Longitude: " + position.coords.longitude;
-          latitudeInput.value = position.coords.latitude;
-          longitudeInput.value = position.coords.longitude;
-        }
-        
-        function showError(error) {
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              x.innerHTML = "User denied the request for Geolocation.";
-              break;
-            case error.POSITION_UNAVAILABLE:
-              x.innerHTML = "Location information is unavailable.";
-              break;
-            case error.TIMEOUT:
-              x.innerHTML = "The request to get user location timed out.";
-              break;
-            case error.UNKNOWN_ERROR:
-              x.innerHTML = "An unknown error occurred.";
-              break;
-          }
-        }
-    </script>
+  <div class="parent-container">
+      <h1 class="h1">Welcome to <br> UV Index Web!</h1>
+      <form method="post" action="/">
+          <label for="address">Enter your address</label>
+          <input type="text" id="address" placeholder="e.g. Tokyo" name="address">
+          <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+          <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
+          <button type="submit">Get UV Index</button>
+          <p>Or get UV index with</p>
+          <button class="button-getuvindexwithcurrentlocation" type="button" onclick="getUVIndexWithCurrentLocation()">Current Location</button>
+          <p id="demo" style="font-style: italic; color: black; margin-top: 5px; text-align: left;"></p>
+      </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
