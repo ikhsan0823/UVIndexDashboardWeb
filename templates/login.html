@@ -3,125 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Address</title>
-    <style>
-        body {
-            display: flex;
-            font-family: Arial, sans-serif;
-            background-color: #e7f3fd;
-            margin: 0;
-            padding: 20px;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .parent-container {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            align-content: center;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #11e875;
-            border-radius: 15px;
-        }
-
-        .h1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            width: 100%; /* Menggunakan lebar 100% agar sesuai dengan parent container */
-            color: white;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            width: 100%; /* Menggunakan lebar 100% agar sesuai dengan parent container */
-        }
-
-        .h1, form {
-            flex:1;
-            margin:0;
-        }
-
-        /* Tambahkan aturan media query untuk meresponsifkan lebar form */
-        @media only screen and (min-width: 600px) {
-            form {
-                width: 48%; /* Sesuaikan dengan lebar yang diinginkan pada layar yang lebih besar */
-            }
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        ::placeholder {
-            font-style: italic;
-        }
-
-        button {
-            cursor: pointer;
-            background-color: #11e875;
-            color: white;
-            padding: 10px 15px;
-            width: 100%;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e87511;
-            border-color: #fff;
-        }
-
-        .button-getuvindexwithcurrentlocation {
-            color: black;
-            background-color: #fff;
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-        }
-
-        p {
-            font-size: 12px;
-            text-align: center;
-            color: #737373;
-            margin-top: 30px;
-        }
-    </style>
+    <script
+        src="https://kit.fontawesome.com/64d58efce2.js"
+        crossorigin="anonynous"
+    ></script>
+    <title>Enter Address</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login-style.css') }}">
 </head>
 <body>
-  <div class="parent-container">
-      <h1 class="h1">Welcome to <br> UV Index Web!</h1>
-      <form method="post" action="/">
-          <label for="address">Enter your address</label>
-          <input type="text" id="address" placeholder="e.g. Tokyo" name="address">
-          <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
-          <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
-          <button type="submit">Get UV Index</button>
-          <p>Or get UV index with</p>
-          <button class="button-getuvindexwithcurrentlocation" type="button" onclick="getUVIndexWithCurrentLocation()">Current Location</button>
-          <p id="demo" style="font-style: italic; color: black; margin-top: 5px; text-align: left;"></p>
-      </form>
-  </div>
-
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div class="container">
+        <div class="form-container">
+            <div class="enter-current">
+                <form method="post" action="/" class="enter-address-form">
+                    <h2 class="title">Enter Address</h2>
+                    <div class="input-field">
+                        <i class="form-address"></i>
+                        <input type="text" placeholder="e.g. Tokyo" name="address">
+                    </div>
+                    <div class="input-field">
+                        <i class="form-latitude"></i>
+                        <input type="text" placeholder="Latitude" name="latitude">
+                    </div>
+                    <div class="input-field">
+                        <i class="form-longitude"></i>
+                        <input type="text" placeholder="Longitude" name="longitude">
+                    </div>
+                    <input type="submit" value="Get UV Index" class="btn solid">
+                </form>
+                <form method="post" action="/" class="current-address-form">
+                    <h2 class="title">Current Address</h2>
+                    <div class="input-field">
+                        <i class="form-address"></i>
+                        <input type="text" placeholder="e.g. Tokyo" id="address" name="address" readonly>
+                    </div>
+                    <div class="input-field">
+                        <i class="form-latitude"></i>
+                        <input type="text" placeholder="Latitude" id="latitude" name="latitude" readonly>
+                    </div>
+                    <div class="input-field">
+                        <i class="form-longitude"></i>
+                        <input type="text" placeholder="Longitude" id="longitude" name="longitude" readonly>
+                    </div>
+                    <input type="submit" value="Get UV Index" class="btn solid">
+                    <p id="demo" style="font-style: italic; color: black; margin-top: 5px; text-align: left;"></p>
+                </form>
+            </div>
+        </div>
+        <div class="panel-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Use current address ?</h3>
+                    <p>The automatic search feature utilizes location tracking technology to provide UV index information based on your current location. The system will automatically retrieve your location and provide instant information about the UV index in that area. This feature is particularly convenient for users who want quick information without the need to manually enter an address.</p>
+                    <button class="btn transparent" id="current-address-btn" onclick="getUVIndexWithCurrentLocation()">Get Current Address</button>
+                </div>
+                <img src="https://th.bing.com/th/id/R.c5ce09d2fea02ec7d6c108dd3e1665ad?rik=4ZdZ3yV51tI3Fw&riu=http%3a%2f%2fclipart-library.com%2fimages%2fpc5858azi.png&ehk=Itml3Zg24%2fHBjB8UvlI687DgTdNR9sqUPtKUrZOxSSQ%3d&risl=&pid=ImgRaw&r=0" class="image" alt="Bunga Mawar">
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Enter address ?</h3>
+                    <p>The manual search feature allows you to enter an address directly into the search form. This gives you full control over the location you want to check for UV index. Ideally, you can find out the UV exposure level in a specific area. Simply input the address you want to examine, and our system will provide you with up-to-date information on the UV index in that region.</p>
+                    <button class="btn transparent" id="enter-address-btn">Enter Address</button>
+                </div>
+                <img src="https://th.bing.com/th/id/R.c5ce09d2fea02ec7d6c108dd3e1665ad?rik=4ZdZ3yV51tI3Fw&riu=http%3a%2f%2fclipart-library.com%2fimages%2fpc5858azi.png&ehk=Itml3Zg24%2fHBjB8UvlI687DgTdNR9sqUPtKUrZOxSSQ%3d&risl=&pid=ImgRaw&r=0" class="image" alt="Bunga Mawar">
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -8,6 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+const enter_address_btn = document.querySelector("#enter-address-btn");
+const current_address_btn = document.querySelector("#current-address-btn");
+const container = document.querySelector(".container");
+
+current_address_btn.addEventListener('click', () => {
+    container.classList.add("current-address-mode");
+});
+enter_address_btn.addEventListener('click', () => {
+    container.classList.remove("current-address-mode");
+});
+
 const x = document.getElementById("demo");
 const apiKey = 'b4a44113af2c49eba6294c002abd4997';  // Replace with your Geoapify API key
 const latitudeInput = document.getElementById("latitude");
