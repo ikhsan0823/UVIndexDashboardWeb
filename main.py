@@ -79,8 +79,17 @@ def index():
             if forecast_data['date'] not in grouped_data:
                 grouped_data[forecast_data['date']] = []
             grouped_data[forecast_data['date']].append({'hour': forecast_data['hour'], 'uvi': forecast_data['uvi']})
+        
+        max_uvi_per_group = {} #Mendapatkan nilai maximum
 
-        return render_template('dashboard.html', current_uv_index=current_uv_index, grouped_data=grouped_data, location_info=location_info)
+        for date, data_list in grouped_data.items():
+            max_uvi = max(data_list, key=lambda x: x['uvi'])
+            max_uvi_per_group[date] = {'hour': max_uvi['hour'], 'uvi': max_uvi['uvi']}
+
+        print(max_uvi_per_group)
+
+
+        return render_template('dashboard.html', current_uv_index=current_uv_index, location_info=location_info, max_uvi_per_group=max_uvi_per_group)
 
     return redirect(url_for('login'))
 

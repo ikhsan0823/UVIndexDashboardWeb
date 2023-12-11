@@ -1,104 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>UV Index Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    
-    <div class="header">
-        <div class="header-text">
-            <h1>UV Index Dashboard</h1>
-        </div>
-        <a style:"color: white" class="home-button" href="/login">Home</a>
-    </div>
-    <div class="parent">
+    <h1>UV Index Dashboard</h1>
+    <a style:"color: white" class="home-button" href="/login">Home</a>
+    <div class="container">
         {% if current_uv_index is not none %}
-        <div class="container">
-            <div class="info-container">
-                {% if location_info %}
-                <h4>Address</strong></h4>
-                <p>
-                    <a href="https://www.google.com/search?q={{ location_info.address }}">{{ location_info.address }}</a>
-                </p>
-                <h4>Coordinate</strong></h4>
-                <p>{{ location_info.latitude}}, {{ location_info.longitude }}</p>
-            </div>
-            <div class="current-container">
-                <h3>{{ location_info.local_time }}</h3>
-                <h4>UV Index</h4>
-                <div class="uvindex-container">
-                    <h2>{{ current_uv_index }}</h2>
-                </div>
-                {% endif %}
-            </div>
-            <div class="image-container">
-                {% if current_uv_index is not none %}
-                    {% set uv_index_image = '' %}
-                    {% if current_uv_index >= 0 and current_uv_index < 3 %}
-                        {% set uv_index_image = 'https://i.ibb.co/Thvd0sx/LOW.png' %}
-                        {% set uv_index_massage = 'No Protection Required' %}
-                        {% set uv_index_detilmassage = 'You can safely stay outsides' %}
-                    {% elif current_uv_index >= 3 and current_uv_index < 6 %}
-                        {% set uv_index_image = 'https://i.ibb.co/gZcXDvw/MODERATE.png' %}
-                        {% set uv_index_massage = 'Protection Required' %}
-                        {% set uv_index_detilmassage = 'Slip on a shirt, slop on sunscreen and slap on a hat' %}
-                    {% elif current_uv_index >= 6 and current_uv_index < 8 %}
-                        {% set uv_index_image = 'https://i.ibb.co/t8VwWCh/HIGH.png' %}
-                        {% set uv_index_massage = 'Protection Required' %}
-                        {% set uv_index_detilmassage = 'Slip on a shirt, slop on sunscreen and slap on a hat! Seek shade during midday hours' %}
-                    {% elif current_uv_index >= 8 and current_uv_index < 11 %}
-                        {% set uv_index_image = 'https://i.ibb.co/WWL10dN/VERY-HIGH.png' %}
-                        {% set uv_index_massage = 'Extra Protection Required' %}
-                        {% set uv_index_detilmassage = 'Make sure you seek shade! Shirt, sunscreen and a hat are a must! Avoid being outside during midday hours' %}
-                    {% else %}
-                        {% set uv_index_image = 'https://i.ibb.co/QcLvZMb/EXTREME.png' %}
-                        {% set uv_index_massage = 'Extra Protection Required' %}
-                        {% set uv_index_detilmassage = 'Avoid being outside during midday hours! Make sure you seek shade! Shirt, sunscreen and a hat are a must' %}
-                    {% endif %}
-                    {% if uv_index_image %}
-                        <img src="{{ uv_index_image }}" alt="UV Index Image" style="max-height: 100px; max-width: 100px;">
-                        <div class="massage">
-                            <h3 style="text-align: center;">{{ uv_index_massage }} </h3>
-                            <p style="text-align: center;">{{ uv_index_detilmassage }}</p>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            </div>
+        <div class="current-location">
+            {% if location_info %}
+            <h3>Address</h3>
+            <p>
+                <a href="https://www.google.com/search?q={{ location_info.address }}">{{ location_info.address }}</a>
+            </p>
+            <h3>Coordinates</h3>
+            <p>{{ location_info.latitude}}, {{ location_info.longitude }}</p>
         </div>
-        <div class="all-forecast">
-            <div class="forecast-text" id="forecast-button">
-                <h3 style="color: black;">Forecast</h3>
-            </div>
-            <div class="forecast-container" id="forecast-container">
-            {% for date, group in grouped_data.items() %}
-                <div class="group-container">
-                    <h3>{{ date }}</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>UV Index</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for data in group %}
-                                <tr>
-                                    <td>{{ data.hour }}</td>
-                                    <td>{{ data.uvi }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+        <div class="uv-index-data">
+            <div class="current-uv-index">
+                <div class="details">
+                <h2>{{ location_info.local_time }}</h2>
+                <h4>UV Index: {{ current_uv_index }}</h4>
                 </div>
-            {% endfor %}
+                <div class="icon">
+                    {% if current_uv_index is not none %}
+                        {% set uv_index_image = '' %}
+                        {% if current_uv_index >= 0 and current_uv_index < 3 %}
+                            {% set uv_index_image = 'https://i.ibb.co/Thvd0sx/LOW.png' %}
+                            {% set uv_index_massage = 'No Protection Required' %}
+                            {% set uv_index_detilmassage = 'You can safely stay outsides' %}
+                        {% elif current_uv_index >= 3 and current_uv_index < 6 %}
+                            {% set uv_index_image = 'https://i.ibb.co/gZcXDvw/MODERATE.png' %}
+                            {% set uv_index_massage = 'Protection Required' %}
+                            {% set uv_index_detilmassage = 'Slip on a shirt, slop on sunscreen and slap on a hat' %}
+                        {% elif current_uv_index >= 6 and current_uv_index < 8 %}
+                            {% set uv_index_image = 'https://i.ibb.co/t8VwWCh/HIGH.png' %}
+                            {% set uv_index_massage = 'Protection Required' %}
+                            {% set uv_index_detilmassage = 'Slip on a shirt, slop on sunscreen and slap on a hat! Seek shade during midday hours' %}
+                        {% elif current_uv_index >= 8 and current_uv_index < 11 %}
+                            {% set uv_index_image = 'https://i.ibb.co/WWL10dN/VERY-HIGH.png' %}
+                            {% set uv_index_massage = 'Extra Protection Required' %}
+                            {% set uv_index_detilmassage = 'Make sure you seek shade! Shirt, sunscreen and a hat are a must! Avoid being outside during midday hours' %}
+                        {% else %}
+                            {% set uv_index_image = 'https://i.ibb.co/QcLvZMb/EXTREME.png' %}
+                            {% set uv_index_massage = 'Extra Protection Required' %}
+                            {% set uv_index_detilmassage = 'Avoid being outside during midday hours! Make sure you seek shade! Shirt, sunscreen and a hat are a must' %}
+                        {% endif %}
+                        {% if uv_index_image %}
+                            <img src="{{ uv_index_image }}" alt="UV Index Image">
+                            <h4 style="text-align: center;">{{ uv_index_massage }} </h4>
+                            <p style="text-align: center;">{{ uv_index_detilmassage }}</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="days-forecast">
+                <h2>Forecast</h2>
+                {% for date, group in max_uvi_per_group.items() %}
+                <ul class="uv-index-cards">
+                    <li class="card">
+                        <h3>{{ date }}</h3>
+                        {% if group['uvi'] is not none %}
+                            {% set uv_index_image = '' %}
+                            {% if group['uvi'] >= 0 and group['uvi'] < 3 %}
+                                {% set uv_index_image = 'https://i.ibb.co/Thvd0sx/LOW.png' %}
+                            {% elif group['uvi'] >= 3 and group['uvi'] < 6 %}
+                                {% set uv_index_image = 'https://i.ibb.co/gZcXDvw/MODERATE.png' %}
+                            {% elif group['uvi'] >= 6 and group['uvi'] < 8 %}
+                                {% set uv_index_image = 'https://i.ibb.co/t8VwWCh/HIGH.png' %}
+                            {% elif group['uvi'] >= 8 and group['uvi'] < 11 %}
+                                {% set uv_index_image = 'https://i.ibb.co/WWL10dN/VERY-HIGH.png' %}
+                            {% else %}
+                                {% set uv_index_image = 'https://i.ibb.co/QcLvZMb/EXTREME.png' %}
+                            {% endif %}
+                            {% if uv_index_image %}
+                                <img src="{{ uv_index_image }}" alt="UV Index Image">
+                            {% endif %}
+                        {% endif %}
+                        <h6>UV Index: {{ group['uvi'] }} at {{ group['hour'] }}</h6>
+                    </li>
+                </ul>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
     </div>
 </body>
 </html>

@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-        src="https://kit.fontawesome.com/64d58efce2.js"
-        crossorigin="anonynous"
-    ></script>
-    <title>Enter Address</title>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonynous"></script>
+    <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login-style.css') }}">
 </head>
 <body>
@@ -15,26 +12,27 @@
         <div class="form-container">
             <div class="enter-current">
                 <form method="post" action="/" class="enter-address-form">
-                    <h2 class="title">Enter Address</h2>
+                    <h2 class="title">Input Address</h2>
                     <div class="input-field">
                         <i class="form-address"></i>
                         <input type="text" placeholder="e.g. Tokyo" name="address">
                     </div>
+                    <p class="latitude-longitude">Or Get uv index with coordinates</p>
                     <div class="input-field">
                         <i class="form-latitude"></i>
-                        <input type="text" placeholder="Latitude" name="latitude">
+                        <input type="text" placeholder="Latitude (e.g. 35.6821936)" name="latitude">
                     </div>
                     <div class="input-field">
                         <i class="form-longitude"></i>
-                        <input type="text" placeholder="Longitude" name="longitude">
+                        <input type="text" placeholder="Longitude (e.g. 139.762221)" name="longitude">
                     </div>
                     <input type="submit" value="Get UV Index" class="btn solid">
                 </form>
                 <form method="post" action="/" class="current-address-form">
-                    <h2 class="title">Current Address</h2>
+                    <h2 class="title">AutoLocate</h2>
                     <div class="input-field">
                         <i class="form-address"></i>
-                        <input type="text" placeholder="e.g. Tokyo" id="address" name="address" readonly>
+                        <input type="text" placeholder="Address" id="address" name="address" readonly>
                     </div>
                     <div class="input-field">
                         <i class="form-latitude"></i>
@@ -52,19 +50,19 @@
         <div class="panel-container">
             <div class="panel left-panel">
                 <div class="content">
-                    <h3>Use current address ?</h3>
+                    <h3>Use AutoLocate ?</h3>
                     <p>The automatic search feature utilizes location tracking technology to provide UV index information based on your current location. The system will automatically retrieve your location and provide instant information about the UV index in that area. This feature is particularly convenient for users who want quick information without the need to manually enter an address.</p>
-                    <button class="btn transparent" id="current-address-btn" onclick="getUVIndexWithCurrentLocation()">Get Current Address</button>
+                    <button class="btn transparent" id="current-address-btn" onclick="getUVIndexWithCurrentLocation()">AutoLocate</button>
                 </div>
-                <img src="https://th.bing.com/th/id/R.c5ce09d2fea02ec7d6c108dd3e1665ad?rik=4ZdZ3yV51tI3Fw&riu=http%3a%2f%2fclipart-library.com%2fimages%2fpc5858azi.png&ehk=Itml3Zg24%2fHBjB8UvlI687DgTdNR9sqUPtKUrZOxSSQ%3d&risl=&pid=ImgRaw&r=0" class="image" alt="Bunga Mawar">
+                <img src="https://cdn-icons-png.flaticon.com/512/4678/4678534.png" class="image" alt="">
             </div>
             <div class="panel right-panel">
                 <div class="content">
-                    <h3>Enter address ?</h3>
+                    <h3>Input address ?</h3>
                     <p>The manual search feature allows you to enter an address directly into the search form. This gives you full control over the location you want to check for UV index. Ideally, you can find out the UV exposure level in a specific area. Simply input the address you want to examine, and our system will provide you with up-to-date information on the UV index in that region.</p>
-                    <button class="btn transparent" id="enter-address-btn">Enter Address</button>
+                    <button class="btn transparent" id="enter-address-btn">Input Address</button>
                 </div>
-                <img src="https://th.bing.com/th/id/R.c5ce09d2fea02ec7d6c108dd3e1665ad?rik=4ZdZ3yV51tI3Fw&riu=http%3a%2f%2fclipart-library.com%2fimages%2fpc5858azi.png&ehk=Itml3Zg24%2fHBjB8UvlI687DgTdNR9sqUPtKUrZOxSSQ%3d&risl=&pid=ImgRaw&r=0" class="image" alt="Bunga Mawar">
+                <img src="https://cdn3.iconfinder.com/data/icons/weather-vector-line-2/128/59-1024.png" class="image" alt="">
             </div>
         </div>
     </div>
