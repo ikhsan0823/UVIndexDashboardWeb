@@ -5,25 +5,29 @@
     <title>UV Index Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
     <h1>UV Index Dashboard</h1>
-    <a style:"color: white" class="home-button" href="/login">Home</a>
-    <div class="container">
+    <section class="container">
         {% if current_uv_index is not none %}
         <div class="current-location">
             {% if location_info %}
             <h3>Address</h3>
             <p>
-                <a href="https://www.google.com/search?q={{ location_info.address }}">{{ location_info.address }}</a>
+                <a style="color: black;" href="https://www.google.com/search?q={{ location_info.address }}">{{ location_info.address }}</a>
             </p>
-            <h3>Coordinates</h3>
+            <h3 class="coordinates">Coordinates</h3>
             <p>{{ location_info.latitude}}, {{ location_info.longitude }}</p>
+            <form action="/login">
+                <input class="home-button solid" type="submit" value="Home" />
+            </form>
         </div>
         <div class="uv-index-data">
             <div class="current-uv-index">
                 <div class="details">
-                <h2>{{ location_info.local_time }}</h2>
+                <h2>{{ location_info.tanggal }}</h2>
+                <h4>Time: {{ location_info.waktu }}</h4>
                 <h4>UV Index: {{ current_uv_index }}</h4>
                 </div>
                 <div class="icon">
@@ -52,8 +56,8 @@
                         {% endif %}
                         {% if uv_index_image %}
                             <img src="{{ uv_index_image }}" alt="UV Index Image">
-                            <h4 style="text-align: center;">{{ uv_index_massage }} </h4>
-                            <p style="text-align: center;">{{ uv_index_detilmassage }}</p>
+                            <h4>{{ uv_index_massage }} </h4>
+                            <p>{{ uv_index_detilmassage }}</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -61,34 +65,47 @@
             {% endif %}
             <div class="days-forecast">
                 <h2>Forecast</h2>
-                {% for date, group in max_uvi_per_group.items() %}
-                <ul class="uv-index-cards">
-                    <li class="card">
-                        <h3>{{ date }}</h3>
-                        {% if group['uvi'] is not none %}
-                            {% set uv_index_image = '' %}
-                            {% if group['uvi'] >= 0 and group['uvi'] < 3 %}
-                                {% set uv_index_image = 'https://i.ibb.co/Thvd0sx/LOW.png' %}
-                            {% elif group['uvi'] >= 3 and group['uvi'] < 6 %}
-                                {% set uv_index_image = 'https://i.ibb.co/gZcXDvw/MODERATE.png' %}
-                            {% elif group['uvi'] >= 6 and group['uvi'] < 8 %}
-                                {% set uv_index_image = 'https://i.ibb.co/t8VwWCh/HIGH.png' %}
-                            {% elif group['uvi'] >= 8 and group['uvi'] < 11 %}
-                                {% set uv_index_image = 'https://i.ibb.co/WWL10dN/VERY-HIGH.png' %}
-                            {% else %}
-                                {% set uv_index_image = 'https://i.ibb.co/QcLvZMb/EXTREME.png' %}
+                <div class="forecast-data-container">
+                    {% for date, group in max_uvi_per_group.items() %}
+                        <ul class="uv-index-card">
+                            <h3>{{ date }}</h3>
+                            {% if group['uvi'] is not none %}
+                                {% set uv_index_image = '' %}
+                                {% if group['uvi'] >= 0 and group['uvi'] < 3 %}
+                                    {% set uv_index_image = 'https://i.ibb.co/Thvd0sx/LOW.png' %}
+                                {% elif group['uvi'] >= 3 and group['uvi'] < 6 %}
+                                    {% set uv_index_image = 'https://i.ibb.co/gZcXDvw/MODERATE.png' %}
+                                {% elif group['uvi'] >= 6 and group['uvi'] < 8 %}
+                                    {% set uv_index_image = 'https://i.ibb.co/t8VwWCh/HIGH.png' %}
+                                {% elif group['uvi'] >= 8 and group['uvi'] < 11 %}
+                                    {% set uv_index_image = 'https://i.ibb.co/WWL10dN/VERY-HIGH.png' %}
+                                {% else %}
+                                    {% set uv_index_image = 'https://i.ibb.co/QcLvZMb/EXTREME.png' %}
+                                {% endif %}
+                                {% if uv_index_image %}
+                                    <img src="{{ uv_index_image }}" alt="UV Index Image">
+                                {% endif %}
                             {% endif %}
-                            {% if uv_index_image %}
-                                <img src="{{ uv_index_image }}" alt="UV Index Image">
-                            {% endif %}
-                        {% endif %}
-                        <h6>UV Index: {{ group['uvi'] }} at {{ group['hour'] }}</h6>
-                    </li>
-                </ul>
-                {% endfor %}
+                            <h5>UV Index: {{ group['uvi'] }} at {{ group['hour'] }}</h5>
+                            <button class="btn" type="button" data-date="{{ date }}">See Details</button>
+                        </ul>
+                    {% endfor %}
+                </div>
+                <div class="more-content">
+                    {% for date, group in grouped_data.items() %}
+                    <h3 data-date="{{ date }}">{{ date }}</h3>
+                    <div id="mydiv" data-grouped-data='{{ grouped_data|tojson }}'></div>
+                    <canvas class="canvas" id="chart-{{ date }}" data-date="{{ date }}"></canvas>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endif %}
-    </div>
+    </section>
+    <footer>
+        <p>Author: Ikhsan Humaerah Fatta Basri<br>
+        <a href="mailto:ikhsanhumaerahfattabasri@gmail.com">ikhsanhumaerahfattabasri@gmail.com</a></p>
+    </footer>
+    <script src="{{ url_for('static', filename='dashboard-script.js') }}"></script>
 </body>
 </html>

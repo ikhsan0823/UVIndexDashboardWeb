@@ -116,6 +116,7 @@ form.current-address-form{
     font-weight: 600;
     margin: 10px 0;
     transition: .55s;
+    transition: background-color 0.3s ease;
 }
 .btn:hover{
     background-color: #0d65fc;  

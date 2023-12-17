@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 3em;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        .error-message {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .home-button {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            width: 150px;
+            height: 49px;
+            border: none;
+            outline: none;
+            border-radius: 49px;
+            cursor: pointer;
+            background-color: #fdc159;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: .55s;
+            transition: background-color 0.3s ease;
+        }
+        .home-button:hover {
+            background-color: #e87511;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">Oops!</div>
+        <div class="error-message">
+            An error occurred. Please try again later.
+        </div>
+        <form action="/login">
+            <input class="home-button solid" type="submit" value="Home" />
+        </form>
+    </div>
+</body>
+</html>

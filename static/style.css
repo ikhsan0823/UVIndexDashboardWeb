@@ -17,17 +17,20 @@ h1 {
 }
 .home-button {
   display: flex;
+  justify-content: center;
   align-content: center;
-  cursor: pointer;
-  margin-right: 10px;
-  text-decoration: none;
-  padding: 10px 15px;
-  background-color: #11e875;
-  color: #fff;
-  width: 70px;
-  height: 40px;
+  width: 150px;
+  height: 49px;
   border: none;
-  border-radius: 4px;
+  outline: none;
+  border-radius: 49px;
+  cursor: pointer;
+  background-color: #fdc159;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: .55s;
   transition: background-color 0.3s ease;
 }
 .home-button:hover {
@@ -40,21 +43,34 @@ h1 {
 }
 .current-location {
   width: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .current-location h3 {
   text-align: center;
 }
+.current-location .coordinates {
+  margin-top: 15px;
+}
 .current-location p {
-  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
   width: 100%;
   outline: none;
   font-size: 1.07rem;
-  padding: 0 17px 17px 17px;
-  margin: 10px 0 20px 0;
-  border-radius: 4px;
+  border-radius: 45px;
   border: 1px solid #fdc159;
   text-align: center;
+  transition: background-color 0.3s ease;
+  color: black;
+  padding: 10px;
 
+}
+.current-location p:hover {
+  background-color: #fdc159;
 }
 a:link, a:visited {
   background-color: none;
@@ -68,8 +84,8 @@ a:link, a:visited {
 .current-uv-index {
   color: #fff;
   background: #5995fd;
-  border-radius: 5px;
-  padding: 20px 70px 20px 20px;
+  border-radius: 15px;
+  padding: 20px 20px 20px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -86,83 +102,258 @@ a:link, a:visited {
   max-width: 120px;
   margin-top: -10px;
 }
+.current-uv-index .details {
+  text-align: left;
+  width: 30%;
+}
 .current-uv-index .icon {
   text-align: center;
+  width: 70%;
 }
 .current-uv-index .icon h4 {
   margin-top: 10px;
   text-transform: capitalize;
+  text-align: center;
 }
+.current-uv-index .icon p {
+  text-align: center;
+}
+/*.days-forecast {
+  display: flex;
+  flex-wrap: wrap;
+}*/
 .days-forecast h2 {
   margin: 20px 0;
   font-size: 1.5rem;
 }
-.uv-index-cards {
+.forecast-data-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  justify-content: space-between;
 }
-.uv-index-cards .card {
+.uv-index-card {
   color: #fff;
   padding: 18px 16px;
   list-style: none;
-  width: calc(100% / 5);
+  width: calc(100% / 2.3);
   background: #fdc159;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-bottom: 20px;
-  width: calc(100% / 4);
+  margin-right: 10px;
 }
-.uv-index-cards .card h3 {
+.uv-index-card h3 {
   font-size: 1.3rem;
   font-weight: 600;
 }
-.uv-index-cards .card img {
+.uv-index-card h5 {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.uv-index-card img {
   max-width: 70px;
   margin: 5px 0 0 0;
 }
+.uv-index-card .btn{
+  margin-top: 10px;
+  background: none;
+  border: 2px solid #fff;
+  width: 100px;
+  height: 35px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 45px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+.uv-index-card .btn:hover,
+.uv-index-card .btn:focus {
+  background-color: #fff;
+  color: #555;
+}
 
-@media (max-width: 1400px) {
-  .uv-index-data .current-uv-index {
-    padding: 20px;
-  }
-  .uv-index-cards {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .uv-index-cards .card {
-    width: calc(100% / 3 - 15px);
-  }
+/*.more-content {
+  display: none;
+}*/
+.more-content canvas {
+  width: 800px;
+  height: 400px;
+  margin-top: 15px;
 }
-@media (max-width: 1200px) {
-  .uv-index-cards {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .uv-index-cards .card {
-    width: calc(100% / 2 - 15px);
-  }
+.more-content h3 {
+  margin-top: 20px;
 }
-@media (max-width: 950px) {
-  .current-location {
-    width: 450px;
-  }
-  .uv-index-cards .card {
-    width: 100%;
-  }
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: #4085fd;
+  color: white;
 }
-@media (max-width: 750px) {
-  h1 {
-    font-size: 1.45rem;
-    padding: 16px 0;
-  }
-  .container {
-    flex-wrap: wrap;
-    padding: 15px;
-  }
-  .current-location {
-    width: 100%;
-  }
-  .uv-index-data h2 {
-    font-size: 1.35rem;
-  }
+footer a:link, a:visited {
+  background-color: none;
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+}
+@media screen and (min-width: 1024px) {
+  
+}
+@media screen and (min-device-width: 920px) 
+  and (max-device-width: 1024px) {
+    .current-uv-index .icon {
+      width: 60%;
+    }
+    .current-uv-index .details {
+      width: 40%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+}
+@media screen and (min-device-width: 820px) 
+  and (max-device-width: 920px) {
+    .current-uv-index .icon {
+      width: 60%;
+    }
+    .current-uv-index .details {
+      width: 40%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: calc(100% / 2.1);
+    }
+}
+@media screen and (min-device-width: 770px) 
+  and (max-device-width: 820px) {
+    .current-uv-index .icon {
+      width: 60%;
+    }
+    .current-uv-index .details {
+      width: 40%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
+}
+@media screen and (min-device-width: 650px) 
+  and (max-device-width: 770px) {
+    .current-uv-index .icon {
+      width: 50%;
+    }
+    .current-uv-index .details {
+      width: 50%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
+}
+@media screen and (min-device-width: 500px) 
+  and (max-device-width: 650px) {
+    .current-uv-index {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+    .current-uv-index .icon {
+      width: 100%;
+    }
+    .current-uv-index .details {
+      width: 100%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
+}
+@media screen and (min-device-width: 350px) 
+  and (max-device-width: 500px) {
+    .container {
+      flex-direction: column;
+
+    }
+    .current-location {
+      width: 100%;
+    }
+    .current-uv-index .icon {
+      width: 50%;
+    }
+    .current-uv-index .details {
+      width: 50%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
+}
+@media screen and (min-device-width: 320px) 
+  and (max-device-width: 350px) {
+    .container {
+      flex-direction: column;
+
+    }
+    .current-location {
+      width: 100%;
+    }
+    .current-uv-index {
+      flex-direction: column;
+    }
+    .current-uv-index .icon {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .current-uv-index .details {
+      width: 100%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
+}
+@media screen and (max-device-width: 320px) {
+    .container {
+      flex-direction: column;
+
+    }
+    .current-location {
+      width: 100%;
+    }
+    .current-uv-index {
+      flex-direction: column;
+    }
+    .current-uv-index .icon {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .current-uv-index .details {
+      width: 100%;
+    }
+    .current-uv-index .details h2{
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .uv-index-card {
+      width: 100%;
+    }
 }

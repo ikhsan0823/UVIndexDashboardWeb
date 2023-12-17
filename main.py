@@ -36,11 +36,15 @@ def index():
         timezone = timezone_data.get('timezone', 'UTC')
 
         # Get location information
+        local_time = get_local_time(latitude, longitude)
+        tanggal, waktu = local_time.split()
         location_info = {
             'address': location.address if location else '',
             'latitude': latitude,
             'longitude': longitude,
-            'local_time': get_local_time(latitude, longitude),
+            'tanggal': tanggal,
+            'waktu': waktu,
+            'local_time': local_time,
         }
 
         # Call UV Index API using obtained latitude and longitude
@@ -86,10 +90,8 @@ def index():
             max_uvi = max(data_list, key=lambda x: x['uvi'])
             max_uvi_per_group[date] = {'hour': max_uvi['hour'], 'uvi': max_uvi['uvi']}
 
-        print(max_uvi_per_group)
 
-
-        return render_template('dashboard.html', current_uv_index=current_uv_index, location_info=location_info, max_uvi_per_group=max_uvi_per_group)
+        return render_template('dashboard.html', current_uv_index=current_uv_index, location_info=location_info, max_uvi_per_group=max_uvi_per_group, grouped_data=grouped_data)
 
     return redirect(url_for('login'))
 
@@ -123,6 +125,10 @@ def get_local_time(latitude, longitude):
     local_time = utc_time + timedelta(hours=offset_hours)
 
     return local_time.strftime('%Y-%m-%d %H:%M:%S')
+
+@app.errorhandler(Exception)
+def error_handler(error):
+    return render_template('error.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
